@@ -34,6 +34,7 @@ public class CmsController {
 
     @PostMapping("/verify")
     public ResponseEntity<CmsVerificationResponse> verify(@Valid @RequestBody CmsVerifyRequest cmsVerifyRequest) {
+        cmsVerifyRequest.setRevocationCheck();
         return ResponseEntity.ok(cmsService.verify(cmsVerifyRequest.getCms(),
             cmsVerifyRequest.getData(),
             cmsVerifyRequest.getRevocationCheck().contains(CertificateRevocation.OCSP),
